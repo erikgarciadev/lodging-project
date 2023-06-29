@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import App from "./App";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import AuthProvider from "./context/auth.jsx";
+import AuthProvider from "./context/auth";
+import ModalLoginRegisterProvider from "./context/modal-login-register";
 
 const router = createHashRouter([
   {
@@ -15,7 +16,9 @@ const router = createHashRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <ModalLoginRegisterProvider>
+        <RouterProvider router={router} />
+      </ModalLoginRegisterProvider>
     </AuthProvider>
   </React.StrictMode>
 );
