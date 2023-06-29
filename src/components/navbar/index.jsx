@@ -7,8 +7,6 @@ import ModalLoginRegister from "../modal-login-register";
 const Navbar = () => {
   const { user } = useAuth();
 
-  console.log(user);
-
   const { handleOpen } = useModalLoginRegister();
 
   return (
