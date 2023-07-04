@@ -23,7 +23,7 @@ const Navbar = () => {
             {user ? (
               <Link
                 className="text-sm md:text-lg text-gray-700 font-semibold"
-                to="/"
+                to="/lodgings"
               >
                 Agregar Hospedajes
               </Link>

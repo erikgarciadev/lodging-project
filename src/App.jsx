@@ -1,6 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar";
+import { useAuth } from "./context/auth";
+import { useModalLoginRegister } from "./context/modal-login-register";
+import { TYPES_MODAL } from "./utils/constants";
 
 function App() {
+  const { user } = useAuth();
+
+  const { handleOpen } = useModalLoginRegister();
+  const navigate = useNavigate();
+  const handleReservation = (lodging_id) => {
+    if (!user) {
+      handleOpen(TYPES_MODAL.LOGIN);
+      return;
+    }
+
+    navigate(`/reservation/${lodging_id}`);
+  };
+
   return (
     <div>
       <Navbar />
@@ -12,7 +29,10 @@ function App() {
             <p className="text-xl font-semibold">Nombre hospedaje</p>
             <p className="text-base font-medium">S/ 200</p>
             <p className="text-base font-medium">Direccio dadadad ad ad n</p>
-            <button className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold">
+            <button
+              onClick={() => handleReservation(1)}
+              className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold"
+            >
               Reservar
             </button>
           </div>
@@ -20,7 +40,10 @@ function App() {
             <p className="text-lg font-semibold">Nombre hospedaje</p>
             <p className="text-base font-medium">S/ 200</p>
             <p className="text-base font-medium">Direccion</p>
-            <button className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold">
+            <button
+              onClick={() => handleReservation(1)}
+              className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold"
+            >
               Reservar
             </button>
           </div>
@@ -28,7 +51,10 @@ function App() {
             <p className="text-lg font-semibold">Nombre hospedaje</p>
             <p className="text-base font-medium">S/ 200</p>
             <p className="text-base font-medium">Direccion</p>
-            <button className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold">
+            <button
+              onClick={() => handleReservation(1)}
+              className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold"
+            >
               Reservar
             </button>
           </div>
@@ -36,7 +62,10 @@ function App() {
             <p className="text-lg font-semibold">Nombre hospedaje</p>
             <p className="text-base font-medium">S/ 200</p>
             <p className="text-base font-medium">Direccion</p>
-            <button className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold">
+            <button
+              onClick={() => handleReservation(1)}
+              className="p-2 mt-3 text-white bg-gray-400 rounded-md font-semibold"
+            >
               Reservar
             </button>
           </div>
