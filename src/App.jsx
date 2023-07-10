@@ -33,7 +33,6 @@ function App() {
     navigate(`/reservation/${lodging_id}`);
   };
 
-  console.log(lodgings);
 
   return (
     <div>

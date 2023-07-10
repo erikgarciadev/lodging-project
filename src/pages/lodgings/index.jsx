@@ -48,8 +48,6 @@ const LodgingsPage = () => {
     }
   };
 
-  console.log(lodgings);
-
   return (
     <div>
       <Navbar />
