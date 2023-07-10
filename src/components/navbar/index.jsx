@@ -5,7 +5,7 @@ import { TYPES_MODAL } from "../../utils/constants";
 import ModalLoginRegister from "../modal-login-register";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const { handleOpen } = useModalLoginRegister();
 
@@ -31,9 +31,17 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-3">
             {user ? (
-              <p className="text-sm md:text-lg text-black font-semibold">
-                {user.name ?? ""} {user.lastname ?? ""}
-              </p>
+              <>
+                <p className="text-sm md:text-lg text-black font-semibold">
+                  {user.name ?? ""} {user.lastname ?? ""}
+                </p>
+                <button
+                  onClick={() => updateUser(null)}
+                  className="text-sm md:text-lg text-gray-700 font-semibold"
+                >
+                  Cerrar sesion
+                </button>
+              </>
             ) : (
               <>
                 <button

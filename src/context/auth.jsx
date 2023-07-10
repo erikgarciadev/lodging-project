@@ -17,6 +17,10 @@ const AuthProvider = (props) => {
 
   const updateUser = React.useCallback((dataUser) => {
     setUser(dataUser);
+    if (dataUser === null) {
+      localStorage.removeItem("user");
+      return;
+    }
     localStorage.setItem("user", JSON.stringify(dataUser));
   }, []);
 
