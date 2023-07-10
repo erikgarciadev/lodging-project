@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 
 const ReservationPage = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  if (!user) navigate("/");
+
   const handleBack = () => {
     navigate(-1);
   };
@@ -20,7 +25,9 @@ const ReservationPage = () => {
             </div>
             <div>
               <h2 className="font-semibold text-xl">Datos usuario</h2>
-              <p>Nombre usuario</p>
+              <p>
+                {user.name} {user.lastname}
+              </p>
             </div>
           </div>
           <div className=" mt-2 w-full gap-3">

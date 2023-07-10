@@ -7,6 +7,8 @@ import AuthProvider from "./context/auth";
 import ModalLoginRegisterProvider from "./context/modal-login-register";
 import LodgingsPage from "./pages/lodgings";
 import ReservationPage from "./pages/reservation";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createHashRouter([
   {
@@ -28,6 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <ModalLoginRegisterProvider>
         <RouterProvider router={router} />
+        <ToastContainer />
       </ModalLoginRegisterProvider>
     </AuthProvider>
   </React.StrictMode>

@@ -1,10 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { useModalLoginRegister } from "../../context/modal-login-register";
 import React from "react";
-import { TYPES_MODAL } from "../../utils/constants";
+import { CONFIG_TOAST, TYPES_MODAL } from "../../utils/constants";
 import FormLogin from "./forms/login";
 import { useAuth } from "../../context/auth";
 import FormRegister from "./forms/register";
+import axios from "axios";
+import { API_URL } from "../../utils/config";
+import { toast } from "react-toastify";
 
 const ModalLoginRegister = () => {
   const { open, type, handleClose } = useModalLoginRegister();
@@ -16,12 +19,41 @@ const ModalLoginRegister = () => {
     return "Registrarse";
   };
 
-  const handleSubmitLogin = () => {
-    updateUser({
-      id: 1,
-      name: "Test",
-    });
-    handleClose();
+  const handleSubmitLogin = async (data) => {
+    try {
+      const response = await axios.post(`${API_URL}/login`, {
+        email: data.email,
+        password: data.password,
+      });
+
+      const user = response.data;
+      updateUser(user);
+
+      toast.success("Se inicio sesión con éxito", CONFIG_TOAST);
+
+      handleClose();
+    } catch (error) {
+      toast.error("Ocurrio un error. Vuelve a intentarlo", CONFIG_TOAST);
+    }
+  };
+
+  const handleSubmitRegister = async (data) => {
+    try {
+      await axios.post(`${API_URL}/api/users`, {
+        name: data.name,
+        lastname: data.lastname,
+        age: Number(data.age),
+        email: data.email,
+        gender: data.gender,
+        password: data.password,
+      });
+
+      toast.success("Se registro el usuario con exito", CONFIG_TOAST);
+
+      handleClose();
+    } catch (error) {
+      toast.error("Ocurrio un error. Vuelve a intentarlo", CONFIG_TOAST);
+    }
   };
 
   const renderContent = () => {
@@ -30,7 +62,12 @@ const ModalLoginRegister = () => {
         <FormLogin handleClose={handleClose} handleSubmit={handleSubmitLogin} />
       );
 
-    return <FormRegister handleClose={handleClose} handleSubmit={() => {}} />;
+    return (
+      <FormRegister
+        handleClose={handleClose}
+        handleSubmit={handleSubmitRegister}
+      />
+    );
   };
 
   return (

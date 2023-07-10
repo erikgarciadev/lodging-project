@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             {user ? (
               <p className="text-sm md:text-lg text-black font-semibold">
-                Usuario
+                {user.name ?? ""} {user.lastname ?? ""}
               </p>
             ) : (
               <>

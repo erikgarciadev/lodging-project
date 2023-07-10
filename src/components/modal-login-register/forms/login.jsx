@@ -1,22 +1,40 @@
 /* eslint-disable react/prop-types */
 
+import { useForm } from "react-hook-form";
+
 const FormLogin = ({ handleClose, handleSubmit }) => {
+  const {
+    register,
+    handleSubmit: handleSubmitForm,
+    formState: { errors },
+  } = useForm();
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
-      }}
-    >
+    <form onSubmit={handleSubmitForm(handleSubmit)}>
       <div className="mt-2">
         <div className="flex flex-col gap-1 mb-3">
           <label>Email</label>
-          <input className="w-full border h-9 rounded-xl px-2" type="text" />
+          <input
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
+            className="w-full border h-9 rounded-xl px-2"
+            type="text"
+          />
         </div>
 
         <div className="flex flex-col gap-1 mb-3">
           <label>Contraseña</label>
           <input
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
             className="w-full border h-9 rounded-xl px-2"
             type="password"
           />

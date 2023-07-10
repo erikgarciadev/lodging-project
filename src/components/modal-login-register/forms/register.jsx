@@ -1,47 +1,111 @@
 /* eslint-disable react/prop-types */
 
+import { useForm } from "react-hook-form";
+
 const FormRegister = ({ handleClose, handleSubmit }) => {
+  const {
+    register,
+    handleSubmit: handleSubmitForm,
+    formState: { errors },
+  } = useForm();
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
-      }}
-    >
+    <form onSubmit={handleSubmitForm(handleSubmit)}>
       <div className="mt-2">
         <div className="flex flex-col gap-1 mb-3">
           <label className="font-semibold">Nombres</label>
-          <input className="w-full border h-9 rounded-xl px-2" type="text" />
+          <input
+            {...register("name", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
+            className="w-full border h-9 rounded-xl px-2"
+            type="text"
+          />
         </div>
         <div className="flex flex-col gap-1 mb-3">
           <label className="font-semibold">Apellidos</label>
-          <input className="w-full border h-9 rounded-xl px-2" type="text" />
+          <input
+            {...register("lastname", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
+            className="w-full border h-9 rounded-xl px-2"
+            type="text"
+          />
         </div>
         <div className="flex flex-col gap-1 mb-3">
           <label className="font-semibold">Email</label>
-          <input className="w-full border h-9 rounded-xl px-2" type="text" />
+          <input
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
+            className="w-full border h-9 rounded-xl px-2"
+            type="text"
+          />
         </div>
         <div className="flex flex-col gap-1 mb-3">
           <label className="font-semibold">Contraseña</label>
           <input
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
             className="w-full border h-9 rounded-xl px-2"
             type="password"
           />
         </div>
         <div className="flex flex-col gap-1 mb-3">
           <label className="font-semibold">Edad</label>
-          <input className="w-1/3 border h-9 rounded-xl px-2" type="number" />
+          <input
+            {...register("age", {
+              required: {
+                value: true,
+                message: "Requerido",
+              },
+            })}
+            className="w-1/3 border h-9 rounded-xl px-2"
+            type="number"
+          />
         </div>
 
         <div className="flex flex-col gap-1 mb-3">
           <label className="font-semibold">Género</label>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <input name={"gender"} className="" type="radio" />
+              <input
+                {...register("gender", {
+                  required: {
+                    value: true,
+                    message: "Requerido",
+                  },
+                })}
+                value="female"
+                className=""
+                type="radio"
+              />
               <p>Masculino</p>
             </div>
             <div className="flex items-center gap-1">
-              <input name={"gender"} type="radio" />
+              <input
+                {...register("gender", {
+                  required: {
+                    value: true,
+                    message: "Requerido",
+                  },
+                })}
+                value="male"
+                type="radio"
+              />
               <p>Femenino</p>
             </div>
           </div>
@@ -60,7 +124,7 @@ const FormRegister = ({ handleClose, handleSubmit }) => {
           type="submit"
           className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white  focus:outline-none"
         >
-          Registarse
+          Registrarse
         </button>
       </div>
     </form>
